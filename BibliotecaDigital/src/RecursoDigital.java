@@ -12,7 +12,7 @@ public abstract class RecursoDigital {
         this.titulo = titulo;
         this.estado = "disponible";
     }
-    
+
     public String getIdentificador() { return identificador; }
     public String getTitulo() { return titulo; }
     public String getEstado() { return estado; }
