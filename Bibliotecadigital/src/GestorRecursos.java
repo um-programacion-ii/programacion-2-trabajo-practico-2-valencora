@@ -11,6 +11,12 @@ public class GestorRecursos {
         this.servicioNotificaciones = servicioNotificaciones;
     }
 
+    public List<RecursoDigital> buscarPorCategoria(CategoriaRecurso categoria) {
+        return recursos.stream()
+                .filter(r -> r.getCategoria().equals(categoria))
+                .collect(Collectors.toList());
+    }
+
     public List<RecursoDigital> buscarPorTitulo(String titulo) {
         return recursos.stream()
                 .filter(r -> r.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
