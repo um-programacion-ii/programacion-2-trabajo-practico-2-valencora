@@ -3,10 +3,11 @@ import java.util.List;
 
 public class GestorRecursos {
     private List<RecursoDigital> recursos;
+    private ServicioNotificaciones servicioNotificaciones;
 
-    public GestorRecursos() {
-        // Inicializamos la lista de recursos sin inyección de dependencias
+    public GestorRecursos(ServicioNotificaciones servicioNotificaciones) {
         this.recursos = new ArrayList<>();
+        this.servicioNotificaciones = servicioNotificaciones;
     }
 
     public void agregarRecurso(RecursoDigital recurso) {
@@ -16,6 +17,4 @@ public class GestorRecursos {
     public List<RecursoDigital> listarRecursos() {
         return recursos;
     }
-
-    // Otros métodos (por ejemplo, de búsqueda) se pueden agregar posteriormente.
 }
