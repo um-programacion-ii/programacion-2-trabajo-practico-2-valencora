@@ -2,8 +2,8 @@ public class Audiolibro extends RecursoDigital implements Prestable, Renovable {
     private String narrador;
     private int duracion;
 
-    public Audiolibro(String identificador, String titulo, String narrador, int duracion) {
-        super(identificador, titulo);
+    public Audiolibro(String identificador, String titulo, CategoriaRecurso categoria, String narrador, int duracion) {
+        super(identificador, titulo, categoria);
         this.narrador = narrador;
         this.duracion = duracion;
     }
@@ -11,10 +11,12 @@ public class Audiolibro extends RecursoDigital implements Prestable, Renovable {
     @Override
     public void mostrarInformacion() {
         System.out.println("Audiolibro: " + getTitulo()
+                + " | Categoría: " + getCategoria()
                 + " | Narrador: " + narrador
                 + " | Duración: " + duracion + " minutos"
                 + " | Estado: " + getEstado());
     }
+
     @Override
     public boolean estaDisponible() {
         return getEstado().equalsIgnoreCase("disponible");
