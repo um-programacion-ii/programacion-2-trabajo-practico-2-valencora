@@ -5,7 +5,6 @@ public class Historieta extends RecursoDigital {
         super(identificador, titulo);
         this.ilustrador = ilustrador;
     }
-    
     @Override
     public void mostrarInformacion() {
         System.out.println("Historieta: " + getTitulo()
