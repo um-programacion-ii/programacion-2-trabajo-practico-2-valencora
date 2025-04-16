@@ -106,12 +106,20 @@ public class Consola {
         }
     }
 
+    public void probarPolimorfismo() {
+        RecursoDigital recurso1 = new Libro("L001", "Harry Potter", "J. K. Rowling", 400);
+        RecursoDigital recurso2 = new Historieta("H001", "Mafalda", "Joaquín Salvador Lavado Tejón");
+        recurso1.mostrarInformacion();
+        recurso2.mostrarInformacion();
+    }
+
+
     public static void main(String[] args) {
         GestorUsuarios gestorUsuarios = new GestorUsuarios();
         GestorRecursos gestorRecursos = new GestorRecursos();
 
-
         Consola consola = new Consola(gestorUsuarios, gestorRecursos);
+        consola.probarPolimorfismo();
         consola.iniciar();
     }
 }
