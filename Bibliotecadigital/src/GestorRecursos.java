@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Comparator;
 
 public class GestorRecursos {
     private List<RecursoDigital> recursos;
@@ -20,6 +21,12 @@ public class GestorRecursos {
     public List<RecursoDigital> buscarPorTitulo(String titulo) {
         return recursos.stream()
                 .filter(r -> r.getTitulo().toLowerCase().contains(titulo.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public List<RecursoDigital> ordenarPorTitulo() {
+        return recursos.stream()
+                .sorted(Comparator.comparing(RecursoDigital::getTitulo))
                 .collect(Collectors.toList());
     }
 
