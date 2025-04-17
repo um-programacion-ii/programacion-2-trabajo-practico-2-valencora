@@ -39,6 +39,9 @@ public class Consola {
                         listarRecursos();
                         break;
                     case 7:
+                        buscarRecurso(scanner);
+                        break;
+                    case 8:
                         System.out.println("Saliendo del sistema...");
                         break;
                     default:
@@ -48,9 +51,55 @@ public class Consola {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
             }
             System.out.println();
-        } while (opcion != 7);
+        } while (opcion != 8);
 
         scanner.close();
+    }
+
+    private void buscarRecurso(Scanner scanner) {
+        System.out.println("----- Buscar Recurso -----");
+        System.out.println("a. Por Título");
+        System.out.println("b. Por Categoría");
+        System.out.print("Seleccione filtro: ");
+        String filtro = scanner.nextLine().trim().toLowerCase();
+
+        switch (filtro) {
+            case "a":
+                System.out.print("Ingrese texto a buscar en el título: ");
+                String texto = scanner.nextLine();
+                List<RecursoDigital> resultadosTitulo =
+                        gestorRecursos.buscarPorTitulo(texto);
+                mostrarLista(resultadosTitulo);
+                break;
+
+            case "b":
+                System.out.println("Categorías disponibles: " + Arrays.toString(CategoriaRecurso.values()));
+                System.out.print("Ingrese la categoría: ");
+                String catStr = scanner.nextLine().toUpperCase();
+                try {
+                    CategoriaRecurso categoria = CategoriaRecurso.valueOf(catStr);
+                    List<RecursoDigital> resultadosCat =
+                            gestorRecursos.buscarPorCategoria(categoria);
+                    mostrarLista(resultadosCat);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Categoría inválida.");
+                }
+                break;
+
+            default:
+                System.out.println("Filtro no válido.");
+        }
+    }
+
+    private void mostrarLista(List<RecursoDigital> lista) {
+        if (lista.isEmpty()) {
+            System.out.println("No se encontraron recursos.");
+        } else {
+            System.out.println("Resultados:");
+            for (RecursoDigital r : lista) {
+                r.mostrarInformacion();
+            }
+        }
     }
 
     private void mostrarMenuPrincipal() {
@@ -61,7 +110,8 @@ public class Consola {
         System.out.println("4. Devolver Recurso");
         System.out.println("5. Realizar Reserva");
         System.out.println("6. Listar Recursos");
-        System.out.println("7. Salir");
+        System.out.println("7. Buscar Recurso");
+        System.out.println("8. Salir");
         System.out.print("Seleccione una opción: ");
     }
 
