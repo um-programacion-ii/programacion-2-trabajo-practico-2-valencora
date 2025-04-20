@@ -134,7 +134,7 @@ public class Consola {
         System.out.println("3. Realizar Préstamo");
         System.out.println("4. Devolver Recurso");
         System.out.println("5. Realizar Reserva");
-        System.out.println("5. Mostrar Reservas");
+        System.out.println("6. Mostrar Reservas");
         System.out.println("7. Listar Recursos");
         System.out.println("8. Buscar Recurso");
         System.out.println("9. Buscar Usuario");
@@ -150,9 +150,11 @@ public class Consola {
         String id = scanner.nextLine();
         System.out.print("Ingrese el email: ");
         String email = scanner.nextLine();
+        System.out.print("Ingrese el numero de telefono: ");
+        String numero = scanner.nextLine();
 
         try {
-            Usuario usuario = new Usuario(nombre, id, email);
+            Usuario usuario = new Usuario(nombre, id, email, numero);
             gestorUsuarios.registrarUsuario(usuario);
             System.out.println("Usuario registrado correctamente.");
         } catch (IllegalArgumentException e) {
