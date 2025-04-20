@@ -5,10 +5,12 @@ import java.util.Arrays;
 public class Consola {
     private GestorUsuarios gestorUsuarios;
     private GestorRecursos gestorRecursos;
+    private GestorPrestamos gestorPrestamos;
 
-    public Consola(GestorUsuarios gestorUsuarios, GestorRecursos gestorRecursos) {
+    public Consola(GestorUsuarios gestorUsuarios, GestorRecursos gestorRecursos, GestorPrestamos gestorPrestamos) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorRecursos = gestorRecursos;
+        this.gestorPrestamos = gestorPrestamos;
     }
 
     public void iniciar() {
@@ -248,10 +250,36 @@ public class Consola {
 
     private void realizarPrestamo(Scanner scanner) {
         System.out.println("----- Realizar Préstamo -----");
+        try {
+            System.out.print("ID Usuario: ");
+            Usuario u = gestorUsuarios.buscarUsuario(scanner.nextLine());
+            System.out.print("ID Recurso: ");
+            String rid = scanner.nextLine();
+            RecursoDigital r = gestorRecursos.listarRecursos().stream()
+                    .filter(x -> x.getIdentificador().equals(rid))
+                    .findFirst().orElse(null);
+            if (r == null) {
+                System.out.println("Recurso no encontrado.");
+            } else {
+                gestorPrestamos.realizarPrestamo(u, r);
+            }
+        } catch (Exception e) {
+            System.out.println("Error al prestar: " + e.getMessage());
+        }
     }
 
     private void devolverRecurso(Scanner scanner) {
         System.out.println("----- Devolver Recurso -----");
+        System.out.print("ID Recurso: ");
+        String rid2 = scanner.nextLine();
+        RecursoDigital r2 = gestorRecursos.listarRecursos().stream()
+                .filter(x -> x.getIdentificador().equals(rid2))
+                .findFirst().orElse(null);
+        if (r2 != null) {
+            gestorPrestamos.devolverRecurso(r2);
+        } else {
+            System.out.println("Recurso no encontrado.");
+        }
     }
 
     private void realizarReserva(Scanner scanner) {
@@ -272,10 +300,11 @@ public class Consola {
 
     public static void main(String[] args) {
         GestorUsuarios gestorUsuarios = new GestorUsuarios();
+        GestorPrestamos gestorPrestamos = new GestorPrestamos();
         ServicioNotificaciones servicioNotificaciones = new ServicioNotificacionesEmail();
         GestorRecursos gestorRecursos = new GestorRecursos(servicioNotificaciones);
 
-        Consola consola = new Consola(gestorUsuarios, gestorRecursos);
+        Consola consola = new Consola(gestorUsuarios, gestorRecursos, gestorPrestamos);
         consola.iniciar();
     }
 }
