@@ -339,11 +339,13 @@ public class Consola {
     public static void main(String[] args) {
         GestorUsuarios gestorUsuarios = new GestorUsuarios();
         ServicioNotificaciones servicioNotificaciones = new ServicioNotificacionesEmail();
+        ServicioNotificacionPrestamos notificador = new ServicioNotificacionPrestamos();
         GestorRecursos gestorRecursos = new GestorRecursos(servicioNotificaciones);
-        GestorPrestamos gestorPrestamos = new GestorPrestamos();
+        GestorPrestamos gestorPrestamos = new GestorPrestamos(notificador);
         GestorReservas gestorReservas = new GestorReservas();
 
         Consola consola = new Consola(gestorUsuarios, gestorRecursos, gestorPrestamos, gestorReservas);
         consola.iniciar();
+        notificador.shutdown();
     }
 }
