@@ -59,6 +59,9 @@ public class Consola {
                         mostrarPrestamosActivos();
                         break;
                     case 12:
+                        generarReportesBasicos();
+                        break;
+                    case 13:
                         System.out.println("Saliendo del sistema...");
                         break;
                     default:
@@ -68,7 +71,7 @@ public class Consola {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
             }
             System.out.println();
-        } while (opcion != 12);
+        } while (opcion != 13);
 
         scanner.close();
     }
@@ -147,7 +150,8 @@ public class Consola {
         System.out.println("9. Buscar Usuario");
         System.out.println("10. Mostrar Notificaciones");
         System.out.println("11. Mostrar Préstamos Activos");
-        System.out.println("12. Salir");
+        System.out.println("12. Generar Reportes Básicos");
+        System.out.println("13. Salir");
         System.out.print("Seleccione una opción: ");
     }
 
@@ -357,6 +361,16 @@ public class Consola {
                         p.getFechaPrestamo());
             }
         }
+    }
+
+    private void generarReportesBasicos() {
+        System.out.println("===== REPORTES BÁSICOS =====");
+        List<Prestamo> prestamos = gestorPrestamos.getPrestamos();
+        Reportes.reporteRecursosMasPrestados(prestamos);
+        Reportes.reporteUsuariosActivos(prestamos);
+        Reportes.reportePorCategoria(prestamos);
+
+        System.out.println("=============================");
     }
 
     public static void main(String[] args) {
