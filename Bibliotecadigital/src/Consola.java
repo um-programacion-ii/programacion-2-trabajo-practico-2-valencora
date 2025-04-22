@@ -62,6 +62,9 @@ public class Consola {
                         generarReportesBasicos();
                         break;
                     case 13:
+                        ejecutarAlertasVencimiento();
+                        break;
+                    case 14:
                         System.out.println("Saliendo del sistema...");
                         break;
                     default:
@@ -71,7 +74,7 @@ public class Consola {
                 System.out.println("Entrada inválida. Por favor, ingrese un número.");
             }
             System.out.println();
-        } while (opcion != 13);
+        } while (opcion != 14);
 
         scanner.close();
     }
@@ -151,7 +154,8 @@ public class Consola {
         System.out.println("10. Mostrar Notificaciones");
         System.out.println("11. Mostrar Préstamos Activos");
         System.out.println("12. Generar Reportes Básicos");
-        System.out.println("13. Salir");
+        System.out.println("13. Verificar Vencimiento de Prestamos");
+        System.out.println("14. Salir");
         System.out.print("Seleccione una opción: ");
     }
 
@@ -372,6 +376,13 @@ public class Consola {
 
         System.out.println("=============================");
     }
+
+    private void ejecutarAlertasVencimiento() {
+        System.out.println("----- ALERTAS DE VENCIMIENTO -----");
+                for (Prestamo p : gestorPrestamos.getPrestamos()) {
+                new AlertaVencimiento(p, 7).validarYEnviar();
+            }
+        }
 
     public static void main(String[] args) {
         GestorUsuarios gestorUsuarios = new GestorUsuarios();
