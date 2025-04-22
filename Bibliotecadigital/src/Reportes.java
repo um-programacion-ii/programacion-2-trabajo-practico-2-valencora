@@ -26,6 +26,15 @@ public class Reportes {
                 ));
     }
 
+    public static void reportePorCategoria(List<Prestamo> prestamos) {
+        Map<CategoriaRecurso, Long> conteoPorCategoria = prestamos.stream()
+                .collect(Collectors.groupingBy(p -> p.getRecurso().getCategoria(), Collectors.counting()));
+        List<String> lineas = conteoPorCategoria.entrySet().stream()
+                .map(e -> e.getKey() + ": " + e.getValue() + " préstamos")
+                .collect(Collectors.toList());
+        mostrarReporte("Préstamos por Categoría", lineas);
+    }
+
     private static void mostrarReporte(String titulo, List<String> lineas) {
         System.out.println("\n=== " + titulo + " ===");
         lineas.forEach(System.out::println);
