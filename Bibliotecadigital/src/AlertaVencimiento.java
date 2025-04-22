@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
 
 public class AlertaVencimiento {
     private final Prestamo prestamo;
@@ -18,6 +19,17 @@ public class AlertaVencimiento {
                     + prestamo.getRecurso().getTitulo()
                     + "' vence en " + diasFaltan + " día(s).");
             System.out.println("****************************");
+            ofrecerRenovacion();
+        }
+    }
+    private void ofrecerRenovacion() {
+        System.out.print("¿Desea renovar el préstamo? (s/n): ");
+        Scanner sc = new Scanner(System.in);
+        String resp = sc.nextLine().trim().toLowerCase();
+        if (resp.equals("s")) {
+            prestamo.getRecurso().actualizarEstado("disponible"); // desbloquea
+            System.out.println("Préstamo renovado. Nueva fecha de vencimiento: "
+                    + LocalDateTime.now().plusDays(7));
         }
     }
     }
