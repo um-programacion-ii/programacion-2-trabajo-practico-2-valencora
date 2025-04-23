@@ -1,3 +1,5 @@
+package Project;
+
 public class Revista extends RecursoDigital {
     private String editor;
     private int numero;
@@ -10,7 +12,7 @@ public class Revista extends RecursoDigital {
 
     @Override
     public void mostrarInformacion() {
-        System.out.println("Revista: " + getTitulo()
+        System.out.println("Project.Revista: " + getTitulo()
                 + " | Categoría: " + getCategoria()
                 + " | Editor: " + editor
                 + " | Número: " + numero
