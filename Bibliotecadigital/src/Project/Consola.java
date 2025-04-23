@@ -207,6 +207,7 @@ public class Consola {
         System.out.println("1. Libro");
         System.out.println("2. Audiolibro");
         System.out.println("3. Historieta");
+        System.out.println("4. Revista");
         System.out.print("Opción: ");
         int tipoRecurso = 0;
         try {
@@ -290,10 +291,34 @@ public class Consola {
                     System.out.println("Error al agregar la historieta: " + e.getMessage());
                 }
                 break;
+            case 4:
+                System.out.println("----- Agregar Revista -----");
+                System.out.print("Ingrese el identificador: ");
+                String idRevista = scanner.nextLine();
+                System.out.print("Ingrese el título: ");
+                String tituloRevista = scanner.nextLine();
+                System.out.print("Ingrese el editor: ");
+                String editor = scanner.nextLine();
+                System.out.print("Ingrese el número de edición: ");
+                int numero = 0;
+                try {
+                    numero = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Número inválido. Se asignará 0.");
+                }
+                try {
+                    Revista revista = new Revista(idRevista, tituloRevista, editor, numero, categoria);
+                    gestorRecursos.agregarRecurso(revista);
+                    System.out.println("Revista agregada correctamente.");
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error al agregar la revista: " + e.getMessage());
+                }
+                break;
             default:
                 System.out.println("Opción de recurso no válida.");
         }
     }
+
 
     private void realizarPrestamo(Scanner scanner) {
         System.out.println("----- Realizar Préstamo -----");
