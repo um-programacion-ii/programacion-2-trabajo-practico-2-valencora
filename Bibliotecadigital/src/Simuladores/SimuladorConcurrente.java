@@ -1,6 +1,5 @@
 package Simuladores;
 import Project.*;
-
 public class SimuladorConcurrente {
     public static void main(String[] args) {
         Usuario u1 = new Usuario("Ana", "a1", "ana@mail.com", "261000000");

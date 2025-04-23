@@ -1,7 +1,7 @@
 package Simuladores;
-import Project.*;
 import java.util.List;
 import java.util.ArrayList;
+import Project.*;
 
 public class SimuladorReportes {
     public static void main(String[] args) {
